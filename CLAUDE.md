@@ -49,3 +49,7 @@ silently fails, and the test then fails later at a confusing point.
   only via in-app clicks.
 - `cart-count` in the header is the sum of all quantities. `quantity-{id}`
   is the quantity of one line item.
+- Add products to the cart via the product detail page: click the product
+  card link from `/products`, then `product-detail-add-to-cart`. Do not use
+  the quick `add-to-cart-{id}` button on product cards — it is only revealed
+  on hover within a narrow region of the card and is unreliable in automation.
