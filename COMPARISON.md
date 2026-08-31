@@ -8,6 +8,11 @@ conventions drawn from a hand-written suite built for the same site.
 The question was whether written architectural rules change what the agents
 produce, or whether the limitation is inherent.
 
+The guided run is this repository. The unguided baseline, kept close to as
+produced rather than repaired, is at
+[MissionPlaywrightAI](https://github.com/fcondette/MissionPlaywrightAI).
+
+
 ---
 
 ## Summary
@@ -210,13 +215,20 @@ produced page objects. The absence of a rule about fixture-provided page objects
 produced instantiation boilerplate. The agents did what they were told, at the
 granularity they were told it.
 
-**The agents cannot detect timing defects, because their own exploration is too
-slow to trigger them.** The generator verifies each step interactively, pausing
+**Interactive verification cannot detect timing defects, because it is too slow
+to trigger them.** The generator confirms each step through the browser, pausing
 between tool calls. Under those conditions pages always finish rendering and
-toasts always dismiss before the next action. Run the same sequence at full
-speed and both assumptions fail. This is a structural blind spot, not
-carelessness — and it is precisely what a tester's habit of asserting readiness
-rather than assuming it exists to prevent.
+toasts always dismiss before the next action. Run the same sequence at full speed
+and both assumptions fail — the eleven unguided tests that submitted a form
+without asserting it had rendered were all verified interactively before being
+written.
+
+A later experiment on the same site — a Playwright CLI–driven run in a separate
+training repository, which wrote tests and then executed them at full speed —
+found an asynchronous form-prefill race that the agent runs had missed entirely.
+The blind spot is not in the model; it is in verifying step-by-step what will
+later execute all at once. Which is precisely what a tester's habit of asserting
+readiness rather than assuming it exists to prevent.
 
 **Review cost is the binding constraint, not generation cost.** Generating 24
 files took two sessions. Reviewing them took an afternoon and was more tiring
