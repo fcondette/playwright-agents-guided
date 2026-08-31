@@ -10,26 +10,25 @@ produce, or whether the limitation is inherent.
 
 The guided run is this repository. The unguided baseline, kept close to as
 produced rather than repaired, is at
-[MissionPlaywrightAI](https://github.com/fcondette/MissionPlaywrightAI).
-
+[playwright-agents-unguided](https://github.com/fcondette/playwright-agents-unguided).
 
 ---
 
 ## Summary
 
-| | Unguided | Guided |
-|---|---|---|
-| Page objects | 0 | 5 |
-| Fixtures | 0 | 1 |
-| Spec files | 24 | 1 |
-| Login blocks duplicated | 24 | 0 |
-| Credentials declared | 24× | once |
-| Failures on first run | 6 / 24 | 0 / 6 |
-| `--repeat-each=3` | 10–12 failures / 72 | 0 failures / 42 |
+|                         | Unguided            | Guided          |
+| ----------------------- | ------------------- | --------------- |
+| Page objects            | 0                   | 5               |
+| Fixtures                | 0                   | 1               |
+| Spec files              | 24                  | 1               |
+| Login blocks duplicated | 24                  | 0               |
+| Credentials declared    | 24×                 | once            |
+| Failures on first run   | 6 / 24              | 0 / 6           |
+| `--repeat-each=3`       | 10–12 failures / 72 | 0 failures / 42 |
 
 The unguided suite was reviewed and repaired by hand, then had readiness
 assertions applied across ten files by the healer agent. The flakiness figures
-above are from *after* that work.
+above are from _after_ that work.
 
 ---
 
@@ -88,9 +87,9 @@ After the six failures were fixed by hand and the healer had added readiness
 assertions across ten files, the suite was run with `--repeat-each=3`:
 
 | Run | Failed | Passed |
-|---|---|---|
-| 1 | 10 | 62 |
-| 2 | 12 | 60 |
+| --- | ------ | ------ |
+| 1   | 10     | 62     |
+| 2   | 12     | 60     |
 
 Nine distinct tests were affected — roughly a third of the suite — at a 14–17%
 failure rate. Individual runs frequently came back green, which is what makes
@@ -177,7 +176,7 @@ const cartPage = new CartPage(page);
 
 Six near-identical blocks. The login duplication was eliminated; this smaller
 version of the same problem was not, because `CLAUDE.md` said page objects must
-live in `pages/` but not that they should be *provided as fixtures*. A rule that
+live in `pages/` but not that they should be _provided as fixtures_. A rule that
 specific was not written, so it was not followed.
 
 Step names are also the plan's prose copied verbatim — full sentences where a
@@ -189,7 +188,6 @@ short label belongs — and each is duplicated in a comment directly above it.
 
 This is a comparison, not a controlled experiment. Both runs used Sonnet 5 with
 high effort in Claude Code, but several other variables moved at once:
-
 
 - **Different scope.** 24 checkout scenarios versus 6 cart scenarios.
 - **Different flows.** Checkout involves an asynchronously prefilled form; the
